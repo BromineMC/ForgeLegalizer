@@ -12,7 +12,7 @@ Made for BromineMC. (`brominemc.ru`, [Discord](https://dsc.gg/brominemc))
 
 ## Download
 
-soon™
+[GitHub](https://github.com/BromineMC/ForgeLegalizer/releases)
 
 ## Building
 
@@ -40,7 +40,7 @@ This project is licensed under [MIT License](https://github.com/BromineMC/ForgeL
 **A**: [Discord](https://dsc.gg/brominemc).
 
 **Q**: How to download?  
-**A**: Releases will be available soon™, snapshots may be available soon™ too.
+**A**: Releases are available via [GitHub](https://github.com/BromineMC/ForgeLegalizer/releases).
 
 **Q**: Fabric, Quilt, 1.20+, 1.18.1, 1.17.1, 1.16.5?  
 **A**: This mod fixes a bug in Forge versions for Minecarft 1.18.2 -> 1.19.4 ONLY.

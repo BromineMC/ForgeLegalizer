@@ -12,7 +12,7 @@
 
 ## Скачать
 
-скоро™
+[GitHub](https://github.com/BromineMC/ForgeLegalizer/releases)
 
 ## Сборка
 
@@ -40,7 +40,7 @@
 **О**: [Discord](https://dsc.gg/brominemc).
 
 **В**: Как скачать?  
-**О**: Релизы будут доступны скоро™, снэпшоты могут быть доступны скоро™ тоже.
+**О**: Релизы доступны на [GitHub](https://github.com/BromineMC/ForgeLegalizer/releases).
 
 **В**: Fabric, Quilt, 1.20+, 1.18.1, 1.17.1, 1.16.5?  
 **О**: Этот мод фиксит баг ТОЛЬКО в Forge версиях для Minecraft 1.18.2 -> 1.19.4.
