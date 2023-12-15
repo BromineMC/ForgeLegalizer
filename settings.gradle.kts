@@ -14,3 +14,4 @@ plugins {
 rootProject.name = "ForgeLegalizer"
 include("forge-1.18.2")
 include("forge-1.19.4")
+include("spigot")

@@ -1,0 +1,47 @@
+# ForgeLegalizerVerifier configuration for SpigotMC plugin.
+# Authors: threefusii (BromineMC).
+
+# Player kick message for hack-alike-Forge.
+# Leave empty to disable.
+# Placeholders:
+# - "%name%" - Player name
+# - "%uuid%" - Player UUID
+kickMessage:
+  - '&cUnsupported Minecraft Forge Version'
+  - ''
+  - '&fForge versions &a1.18.2 -> 1.19.4 &fcontain a bug that provids an &6unfair advantage&f.'
+  - '&fTo prevent false cheat occusations, you &cwon''t be able to join&f.'
+  - '&fMore info: &ehttps://tinyurl.com/forge-reach-bug'
+  - ''
+  - '&fPlease use another mod loader (e.g. Fabric or Quilt),'
+  - '&fanother Minecraft version, or the vanilla (unmodified)'
+  - '&fclient. If you still want to use Forge, download and install'
+  - '&fthe &aForgeLegalizer &fmod from:'
+  - '&fModrinth: &ahttps://modrinth.com/mod/forgelegalizer'
+  - '&fGitHub: &ahttps://github.com/BromineMC/ForgeLegalizer/releases'
+  - ''
+  - '&7%name% (%uuid%)'
+
+# Admin notify message for hack-alike-Forge.
+# Leave empty to disable.
+# Placeholders:
+# - "%name%" - Player name
+# - "%uuid%" - Player UUID
+notifyMessage: "&e%name% &f(&7%uuid%&f) tried to join using &chack-alike-Forge&f."
+
+# Duration in ticks after player with hack-alike-Forge will be kicked.
+# Default: 60 ticks (3 seconds)
+# Increase if players with bad internet connection are being kicked.
+timeout: 60
+
+# Commands to execute on hack-alike-Forge players.
+# Placeholders:
+# - "%name%" - Player name
+# - "%uuid%" - Player UUID
+commands:
+  - 'example_say %name% is bad.'
+  - 'example_ban_command %uuid% 30m hacks'
+
+# Whether the players with unknown version should be kicked as well.
+# Disable if causes false kicks.
+strict: true

@@ -1,0 +1,21 @@
+name: ForgeLegalizerVerifier
+version: '${version}'
+main: ru.brominemc.forgelegalizerverifier.ForgeLegalizerVerifier
+description: 'Checks the presence of the client ForgeLegalizer mod on 1.18.2 -> 1.19.4.'
+authors: [ threefusii, BromineMC ]
+api-version: 1.13
+commands:
+  forgelegalizerverifier:
+    usage: /forgelegalizerverifier [reload]
+    description: 'Main ForgeLegalizerVerifier command.'
+    aliases: [ flv ]
+permissions:
+  forgelegalizerverifier.notify:
+    default: op
+    description: 'Permission for receiving hack-alike-Forge join notifications.'
+  forgelegalizerverifier.reload:
+    default: op
+    description: 'Permission for reloading the plugin.'
+  forgelegalizerverifier.bypass:
+    default: false
+    description: 'Allows bypassing ForgeLegalizerVerifier checks.'

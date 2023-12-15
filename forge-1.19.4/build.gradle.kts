@@ -9,6 +9,7 @@ group = "ru.vidtu.forgelegalizer"
 base.archivesName = "ForgeLegalizer-Forge-1.19.4"
 
 repositories {
+    mavenCentral()
     maven("https://api.modrinth.com/maven")
     maven("https://cursemaven.com")
 }

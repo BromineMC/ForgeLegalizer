@@ -4,7 +4,8 @@ Fixes Forge player reach for 1.18.2 -> 1.19.4.
 
 ## What?
 
-This mod fixes [MinecraftForge/#9309](https://github.com/MinecraftForge/MinecraftForge/issues/9309) by reducing player reach back
+This mod fixes [MinecraftForge/#9309](https://github.com/MinecraftForge/MinecraftForge/issues/9309) by reducing player
+reach back
 to vanilla and allows servers to check whether this mod is installed.
 
 ## FAQ
@@ -18,11 +19,11 @@ and [Modrinth](https://modrinth.com/mod/forgelegalizer).
 
 **Q**: Fabric, Quilt, 1.20+, 1.18.1, 1.17.1, 1.16.5, any other version or mod-loader?  
 **A**: This mod fixes [a bug](https://github.com/MinecraftForge/MinecraftForge/issues/9309) in Forge versions for
-Minecarft 1.18.2 -> 1.19.4 ONLY.
+Minecarft 1.18.2 -> 1.19.4 ONLY. Other platforms will only kick Forge 1.18.2 -> 1.19.4 without the mod.
 
 **Q**: Is it open source?  
-**A**: [Yes.](https://github.com/BromineMC/ForgeLegalizer) (Licensed
-under [MIT License](https://github.com/BromineMC/ForgeLegalizer/blob/main/LICENSE))
+**A**: [Yes.](https://github.com/BromineMC/ForgeLegalizer) (Everything except Spigot plugi is licensed
+under [MIT License](https://github.com/BromineMC/ForgeLegalizer/blob/main/LICENSE); Spigot  plugin is licensed under [GNU General Public License 3.0](https://github.com/BromineMC/ForgeLegalizer/blob/main/spigot/LICENSE))
 
 **Q**: How to detect if the player is using this mod?  
 **A**: The mod [registers](https://wiki.vg/Plugin_channels#minecraft:register) the `forgelegalizer:v1` channel. You can
