@@ -1,0 +1,20 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "MIT"
+issueTrackerURL = "https://github.com/BromineMC/ForgeLegalizer/issues"
+[[mods]]
+modId = "forgelegalizer"
+version = "${version}"
+displayName = "ForgeLegalizer"
+updateJSONURL = "https://raw.githubusercontent.com/VidTu/Meta/main/forge_legalizer.json"
+displayURL = "https://github.com/BromineMC/ForgeLegalizer"
+logoFile = "forgelegalizer.png"
+credits = "BromineMC"
+authors = "VidTu, threefusii"
+description = '''
+This mod fixes issue #9309 in Minecraft Forge that causes extended player attack reach and may lead to problems with anti-cheats.
+This issue affects all Forge version from 1.18.2 through 1.19.4.
+It was fixed in 1.19.4-45.0.39.
+Read more at:
+https://github.com/MinecraftForge/MinecraftForge/issues/9309
+'''
