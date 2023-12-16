@@ -22,8 +22,8 @@ and [Modrinth](https://modrinth.com/mod/forgelegalizer).
 Minecarft 1.18.2 -> 1.19.4 ONLY. Other platforms will only kick Forge 1.18.2 -> 1.19.4 without the mod.
 
 **Q**: Is it open source?  
-**A**: [Yes.](https://github.com/BromineMC/ForgeLegalizer) (Everything except Spigot plugi is licensed
-under [MIT License](https://github.com/BromineMC/ForgeLegalizer/blob/main/LICENSE); Spigot  plugin is licensed under [GNU General Public License 3.0](https://github.com/BromineMC/ForgeLegalizer/blob/main/spigot/LICENSE))
+**A**: [Yes.](https://github.com/BromineMC/ForgeLegalizer) (Everything except Spigot plugin is licensed
+under [MIT License](https://github.com/BromineMC/ForgeLegalizer/blob/main/LICENSE); Spigot plugin is licensed under [GNU General Public License 3.0](https://github.com/BromineMC/ForgeLegalizer/blob/main/spigot/COPYING))
 
 **Q**: How to detect if the player is using this mod?  
 **A**: The mod [registers](https://wiki.vg/Plugin_channels#minecraft:register) the `forgelegalizer:v1` channel. You can

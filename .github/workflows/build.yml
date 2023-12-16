@@ -26,3 +26,4 @@ jobs:
             forge-1.18.2/build/libs/
             forge-1.19.4/build/libs/
             spigot/build/libs/
+            velocity/build/libs/

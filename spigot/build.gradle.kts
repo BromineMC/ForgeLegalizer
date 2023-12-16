@@ -38,10 +38,10 @@ tasks.withType<Jar> {
         attributes(
             "Specification-Title" to "ForgeLegalizerVerifier-Spigot",
             "Specification-Version" to project.version,
-            "Specification-Vendor" to "VidTu, threefusii",
+            "Specification-Vendor" to "threefusii, VidTu",
             "Implementation-Title" to "ForgeLegalizerVerifier-Spigot",
             "Implementation-Version" to project.version,
-            "Implementation-Vendor" to "VidTu, threefusii"
+            "Implementation-Vendor" to "threefusii, VidTu"
         )
     }
 }

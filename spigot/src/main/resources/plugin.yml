@@ -2,7 +2,8 @@ name: ForgeLegalizerVerifier
 version: '${version}'
 main: ru.brominemc.forgelegalizerverifier.ForgeLegalizerVerifier
 description: 'Checks the presence of the client ForgeLegalizer mod on 1.18.2 -> 1.19.4.'
-authors: [ threefusii, BromineMC ]
+website: 'https://github.com/BromineMC/ForgeLegalizer'
+authors: [ threefusii, VidTu, BromineMC ]
 api-version: 1.13
 commands:
   forgelegalizerverifier:

@@ -1,50 +1,47 @@
-# ForgeLegalizerVerifier configuration for SpigotMC plugin.
+# ForgeLegalizerVerifier configuration for Velocity plugin.
 # Authors: threefusii (BromineMC), VidTu (BromineMC).
-
-# Whether the debug is enabled.
-debug: false
 
 # Player kick message for hack-alike-Forge.
 # Leave empty to disable.
 # Placeholders:
 # - "%name%" - Player name
 # - "%uuid%" - Player UUID
-# Using Legacy (&color) formatting.
+# - "%server%" - Backend server name
+# Using MiniMessage (https://docs.advntr.dev/minimessage/) formatting.
 kickMessage:
-  - '&c> Unsupported Minecraft Forge Version&r'
+  - '<red>> Unsupported Minecraft Forge Version</red>'
   - ''
-  - 'Forge versions &e1.18.2 -> 1.19.4&r contain a bug that provides an &6unfair advantage&r.'
-  - 'To prevent false cheat accusations, you &c&nwon''t be able to join&r.'
-  - 'More info: &bhttps://tinyurl.com/forge-reach-bug&r'
+  - 'Forge versions <yellow>1.18.2 -> 1.19.4</yellow> contain a bug that provides an <gold>unfair advantage</gold>.'
+  - 'To prevent false cheat accusations, you <red><u>won''t be able to join</u></red>.'
+  - 'More info: <aqua>https://tinyurl.com/forge-reach-bug</aqua>'
   - ''
   - 'Please use another mod loader (e.g. Fabric or Quilt),'
   - 'another Minecraft version, or the vanilla (unmodified)'
   - 'client. If you still want to use Forge, download and install'
-  - 'the &eForgeLegalizer&r mod from:'
-  - 'Modrinth: &ahttps://modrinth.com/mod/forgelegalizer&r'
-  - 'GitHub: &bhttps://github.com/BromineMC/ForgeLegalizer/releases&r'
+  - 'the <yellow>ForgeLegalizer</yellow> mod from:'
+  - 'Modrinth: <green>https://modrinth.com/mod/forgelegalizer</green>'
+  - 'GitHub: <aqua>https://github.com/BromineMC/ForgeLegalizer/releases</aqua>'
   - ''
-  - '&7%name% (%uuid%)&r'
+  - '<gray>%name% (%uuid%) from %server%</gray>'
 
 # Admin notify message for hack-alike-Forge.
 # Leave empty to disable.
 # Placeholders:
 # - "%name%" - Player name
 # - "%uuid%" - Player UUID
-# Using Legacy (&color) formatting.
+# - "%server%" - Backend server name
+# Using MiniMessage (https://docs.advntr.dev/minimessage/) formatting.
 notifyMessage:
-  - '&e%name% &r(&7%uuid%&r) joined using &chack-alike-Forge&r.'
+  - '<yellow>%name%</yellow> (<gray>%uuid%</gray>) joined using <red>hack-alike-Forge</red>. (<green>%server%</green>)'
 
 # Commands to execute on hack-alike-Forge players.
 # Placeholders:
 # - "%name%" - Player name
 # - "%uuid%" - Player UUID
+# - "%server%" - Backend server name
 commands:
   - 'example_say %name% is bad.'
   - 'example_ban_command %uuid% 30m hacks'
-
-# Maximum player brand length for reading in characters.
-maxBrandLength: 64
 
 # Regular expression (regex) of the Forge-alike brands.
 # Clients with these brands OR with any of the channels below will be checked for ForgeLegalizer.
@@ -53,7 +50,3 @@ forgeBrand: '^(forge|fml,forge|fml,forge,LiteLoader|neoforge)$'
 # Regular expression (regex) of the Forge-alike channels.
 # Clients with any of these channels OR with brands above will be checked for ForgeLegalizer.
 forgeChannel: '^(fml:loginwrapper|forge:tier_sorting|fml:handshake|fml:play|forge:split)$'
-
-# Whether the unknown versions should be treated as prone
-# to the Forge bug. Disable if causes unexpected problems.
-blockUnknownVersions: true
