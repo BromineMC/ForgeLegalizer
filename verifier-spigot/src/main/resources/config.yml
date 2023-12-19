@@ -1,0 +1,53 @@
+# ForgeLegalizerVerifier configuration for SpigotMC plugin.
+# Authors: threefusii (BromineMC), VidTu (BromineMC).
+
+# Player kick message for hack-alike-Forge.
+# Leave empty to disable.
+# Placeholders:
+# - "%name%" - Player name
+# - "%uuid%" - Player UUID
+# Using Legacy (&color) formatting.
+kickMessage:
+  - '&c> Unsupported Minecraft Forge Version&r'
+  - ''
+  - 'Forge versions &e1.18.2 -> 1.19.4&r contain a bug that provides an &6unfair advantage&r.'
+  - 'To prevent false cheat accusations, you &c&nwon''t be able to join&r.'
+  - 'More info: &bhttps://tinyurl.com/forge-reach-bug&r'
+  - ''
+  - 'Please use another mod loader (e.g. Fabric or Quilt),'
+  - 'another Minecraft version, or the vanilla (unmodified)'
+  - 'client. If you still want to use Forge, download and install'
+  - 'the &eForgeLegalizer&r mod from:'
+  - 'Modrinth: &ahttps://modrinth.com/mod/forgelegalizer&r'
+  - 'GitHub: &bhttps://github.com/BromineMC/ForgeLegalizer/releases&r'
+  - ''
+  - '&7%name% (%uuid%)&r'
+
+# Admin notify message for hack-alike-Forge.
+# Leave empty to disable.
+# Placeholders:
+# - "%name%" - Player name
+# - "%uuid%" - Player UUID
+# Using Legacy (&color) formatting.
+notifyMessage:
+  - '&e%name% &r(&7%uuid%&r) joined using &chack-alike-Forge&r.'
+
+# Commands to execute on hack-alike-Forge players.
+# Placeholders:
+# - "%name%" - Player name
+# - "%uuid%" - Player UUID
+commands:
+  - 'example_say %name% is bad.'
+  - 'example_ban_command %uuid% 30m hacks'
+
+# Regular expression (regex) of the Forge-alike brands.
+# Clients with these brands OR with any of the channels below will be checked for ForgeLegalizer.
+forgeBrand: '^(forge|fml,forge|fml,forge,LiteLoader|neoforge)$'
+
+# Regular expression (regex) of the Forge-alike channels.
+# Clients with any of these channels OR with brands above will be checked for ForgeLegalizer.
+forgeChannel: '^(fml:loginwrapper|forge:tier_sorting|fml:handshake|fml:play|forge:split)$'
+
+# Whether the unknown versions should be treated as prone
+# to the Forge bug. Disable if causes unexpected problems.
+blockUnknownVersions: true

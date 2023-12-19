@@ -1,0 +1,10 @@
+{
+  "id": "forgelegalizerverifier",
+  "name": "ForgeLegalizerVerifier",
+  "version": "${version}",
+  "url": "https://github.com/BromineMC/ForgeLegalizer",
+  "main": "ru.brominemc.forgelegalizerverifier.ForgeLegalizerVerifier",
+  "description": "Checks the presence of the client ForgeLegalizer mod on 1.18.2 -> 1.19.4.",
+  "authors": [ "threefusii", "VidTu", "BromineMC" ],
+  "dependencies": []
+}

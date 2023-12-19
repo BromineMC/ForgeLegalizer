@@ -5,13 +5,13 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_17
 java.targetCompatibility = JavaVersion.VERSION_17
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-group = "ru.vidtu.forgelegalizer"
+group = "ru.brominemc.forgelegalizer"
 base.archivesName = "ForgeLegalizer-Forge-1.19.4"
 
 repositories {
     mavenCentral()
-    maven("https://api.modrinth.com/maven")
-    maven("https://cursemaven.com")
+    maven("https://api.modrinth.com/maven/")
+    maven("https://cursemaven.com/")
 }
 
 dependencies {
@@ -44,7 +44,7 @@ tasks.withType<ProcessResources> {
 }
 
 tasks.withType<Jar> {
-    from("LICENSE")
+    from(rootDir.resolve("LICENSE"))
     manifest {
         attributes(
             "Specification-Title" to "ForgeLegalizer",

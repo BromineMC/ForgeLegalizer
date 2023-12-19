@@ -22,8 +22,13 @@ and [Modrinth](https://modrinth.com/mod/forgelegalizer).
 Minecarft 1.18.2 -> 1.19.4 ONLY. Other platforms will only kick Forge 1.18.2 -> 1.19.4 without the mod.
 
 **Q**: Is it open source?  
-**A**: [Yes.](https://github.com/BromineMC/ForgeLegalizer) (Everything except Spigot plugin is licensed
-under [MIT License](https://github.com/BromineMC/ForgeLegalizer/blob/main/LICENSE); Spigot plugin is licensed under [GNU General Public License 3.0](https://github.com/BromineMC/ForgeLegalizer/blob/main/spigot/COPYING))
+**A**: [Yes.](https://github.com/BromineMC/ForgeLegalizer)
+
+**Q**: What license?  
+**A**: Most of the code is licensed as [MIT License](https://github.com/BromineMC/ForgeLegalizer/blob/main/LICENSE).
+Spigot plugin (all files in `verifier-spigot` directory) is licensed
+as [GNU General Public License 3.0](https://github.com/BromineMC/ForgeLegalizer/blob/main/verifier-spigot/COPYING) due
+to Bukkit and Spigot API being GPL too.
 
 **Q**: How to detect if the player is using this mod?  
 **A**: The mod [registers](https://wiki.vg/Plugin_channels#minecraft:register) the `forgelegalizer:v1` channel. You can
@@ -38,3 +43,10 @@ other at your choice to prevent Reach-alike hacks and bugs from working.
 **Q**: Why does this mod exists then?  
 **A**: To prevent people who do not want to hack and are blind to Forge bug from unintentionally gaining unfair
 advantage on your server.
+
+**Q**: Should I install the verifier plugin on the backend (Bukkit/Spigot/Paper) or on the proxy (
+BungeeCord/Waterfall/Velocity)?  
+**A**: It is recommended to install it on the backend. The proxy versions are available but are less tested and may
+cause all sorts of problems, especially with virtual world proxy plugins and forks, such as BotFilter, NullCordX,
+LimboAPI, LimboFilter, etc. You can always install something that works the best depending on your setup and even try
+your luck with installing it on both proxy and backend servers.

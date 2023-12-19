@@ -25,5 +25,6 @@ jobs:
           path: |
             forge-1.18.2/build/libs/
             forge-1.19.4/build/libs/
-            spigot/build/libs/
-            velocity/build/libs/
+            verifier-spigot/build/libs/
+            verifier-velocity/build/libs/
+            verifier-bungee/build/libs/
