@@ -44,8 +44,8 @@ other at your choice to prevent Reach-alike hacks and bugs from working.
 **A**: To prevent people who do not want to hack and are blind to Forge bug from unintentionally gaining unfair
 advantage on your server.
 
-**Q**: Should I install the verifier plugin on the backend (Bukkit/Spigot/Paper) or on the proxy (
-BungeeCord/Waterfall/Velocity)?  
+**Q**: Should I install the verifier plugin on the backend (Bukkit/Spigot/Paper) or on the proxy
+(BungeeCord/Waterfall/Velocity)?  
 **A**: It is recommended to install it on the backend. The proxy versions are available but are less tested and may
 cause all sorts of problems, especially with virtual world proxy plugins and forks, such as BotFilter, NullCordX,
 LimboAPI, LimboFilter, etc. You can always install something that works the best depending on your setup and even try
