@@ -10,13 +10,14 @@ base.archivesName = "ForgeLegalizerVerifier-Bungee"
 
 repositories {
     mavenCentral()
+    maven("https://libraries.minecraft.net/")
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     maven("https://hub.spigotmc.org/nexus/content/groups/public/")
     maven("https://oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
-    compileOnly("net.md-5:bungeecord-api:1.20-R0.1-SNAPSHOT")
+    compileOnly("net.md-5:bungeecord-api:1.20-R0.2-SNAPSHOT")
 }
 
 tasks.withType<JavaCompile> {
