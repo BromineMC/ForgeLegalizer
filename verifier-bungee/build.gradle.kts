@@ -7,6 +7,7 @@ java.targetCompatibility = JavaVersion.VERSION_1_8
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 group = "ru.brominemc.forgelegalizerverifier"
 base.archivesName = "ForgeLegalizerVerifier-Bungee"
+description = "Fixes Forge player reach for 1.18.2 -> 1.19.4."
 
 repositories {
     mavenCentral()
@@ -37,7 +38,7 @@ tasks.withType<Jar> {
         attributes(
             "Specification-Title" to "ForgeLegalizerVerifier-Bungee",
             "Specification-Version" to project.version,
-            "Specification-Vendor" to "threefusii, VidTu",
+            "Specification-Vendor" to "BromineMC",
             "Implementation-Title" to "ForgeLegalizerVerifier-Bungee",
             "Implementation-Version" to project.version,
             "Implementation-Vendor" to "threefusii, VidTu"
