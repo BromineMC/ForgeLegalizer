@@ -2,9 +2,9 @@ plugins {
     id("java")
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_11
-java.targetCompatibility = JavaVersion.VERSION_11
-java.toolchain.languageVersion = JavaLanguageVersion.of(11)
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 group = "ru.brominemc.forgelegalizerverifier"
 base.archivesName = "ForgeLegalizerVerifier-Velocity"
 
@@ -19,7 +19,7 @@ dependencies {
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.release.set(11)
+    options.release.set(17)
 }
 
 tasks.withType<ProcessResources> {
