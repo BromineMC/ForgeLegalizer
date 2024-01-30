@@ -1,5 +1,5 @@
 plugins {
-    id("dev.architectury.loom") version "1.4-SNAPSHOT"
+    id("dev.architectury.loom") version "1.5-SNAPSHOT"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -18,7 +18,7 @@ dependencies {
     // Minecraft
     minecraft("com.mojang:minecraft:1.18.2")
     mappings(loom.officialMojangMappings())
-    forge("net.minecraftforge:forge:1.18.2-40.2.14")
+    forge("net.minecraftforge:forge:1.18.2-40.2.17")
 
     // Speedup loading and testing
     modRuntimeOnly("curse.maven:lazydfu-460819:3544496")
