@@ -1,8 +1,7 @@
 /*
  * ForgeLegalizerVerifier-Spigot is a SpigotMC verifier plugin for ForgeLegalizer client modification.
  * Copyright (C) 2023 VidTu
- * Copyright (C) 2023 threefusii
- * Copyright (C) 2023 BromineMC
+ * Copyright (C) 2023-2024 BromineMC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,6 +56,7 @@ import java.util.stream.Collectors;
  *
  * @author threefusii
  */
+@SuppressWarnings("DynamicRegexReplaceableByCompiledPattern") // <- I do sincerely hope people won't run this on J8.
 public final class ForgeLegalizerVerifier extends JavaPlugin implements Listener, PluginMessageListener {
     /**
      * Invalid configuration player kick.
@@ -99,11 +99,6 @@ public final class ForgeLegalizerVerifier extends JavaPlugin implements Listener
      * Maximum affected protocol version {@code 1.19.4}. (inclusive)
      */
     private static final int MAX_VERSION = 762;
-
-    /**
-     * Registered brand channel.
-     */
-    private String channel;
 
     /**
      * Player kick message for hack-alike-Forge.
@@ -167,7 +162,7 @@ public final class ForgeLegalizerVerifier extends JavaPlugin implements Listener
     /**
      * Player mapped to brands.
      */
-    private final Map<Player, String> brands = new WeakHashMap<>();
+    private final Map<Player, String> brands = new WeakHashMap<>(8);
 
     @Override
     public void onEnable() {
@@ -180,6 +175,17 @@ public final class ForgeLegalizerVerifier extends JavaPlugin implements Listener
             this.getServer().getMessenger().registerIncomingPluginChannel(this, "MC|Brand", this);
         } catch (IllegalArgumentException ignored) {
             // 1.13 throws on 1.12 channel.
+        }
+
+        // Nag for J8.
+        try {
+            // Modules were added in J9.
+            Class.forName("java.lang.Module");
+        } catch (Throwable ignored) {
+            // Nag about J8.
+            if (!Boolean.getBoolean("forgelegalizerverifier.shut.up")) {
+                this.getLogger().warning("Java 8 is outdated. Please, update to a more recent Java version. This is just a warning, the ForgeLegalizerVerifier will work anyway.");
+            }
         }
 
         // Channel used in 1.13.
@@ -300,7 +306,7 @@ public final class ForgeLegalizerVerifier extends JavaPlugin implements Listener
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // Reload the plugin if intended and has permission.
-        if (args.length != 0 && args[0].equalsIgnoreCase("reload") && sender.hasPermission("forgelegalizerverifier.reload")) {
+        if (args.length != 0 && "reload".equalsIgnoreCase(args[0]) && sender.hasPermission("forgelegalizerverifier.reload")) {
             // Reload the config.
             boolean result = this.loadConfigSafe();
 
@@ -450,7 +456,7 @@ public final class ForgeLegalizerVerifier extends JavaPlugin implements Listener
             this.getLogger().log(Level.SEVERE, "Unable to process player's " + player.getName() + " (" + player.getUniqueId() + ") brand payload for ForgeLegalizerVerifier.", t);
 
             // Kick the player.
-            player.kickPlayer(ForgeLegalizerVerifier.BRAND_ERROR);
+            player.kickPlayer(BRAND_ERROR);
 
             // Rethrow the error.
             throw new RuntimeException("Unable to process player's " + player + " brand payload for ForgeLegalizerVerifier.", t);
@@ -475,28 +481,6 @@ public final class ForgeLegalizerVerifier extends JavaPlugin implements Listener
     }
 
     /**
-     * Reads the VarInt from the input.
-     *
-     * @param in Target input
-     * @return Read VarInt
-     * @throws IOException On I/O error or if VarInt is too large
-     * @see <a href="https://wiki.vg/VarInt_And_VarLong">wiki.vg/VarInt_And_VarLong</a>
-     */
-    private int readVarInt(InputStream in) throws IOException {
-        int i = 0, p = 0, b;
-        while (true) {
-            b = in.read();
-            i |= (b & 0x7F) << p;
-            if ((b & 0x80) == 0) break;
-            p += 7;
-            if (p >= 32) {
-                throw new IOException("Too large VarInt. Exploit attempt?");
-            }
-        }
-        return i;
-    }
-
-    /**
      * Tries to kick the player from the proxy using BungeeCord messaging.
      *
      * @param player Target player
@@ -516,5 +500,42 @@ public final class ForgeLegalizerVerifier extends JavaPlugin implements Listener
             // Log the error.
             this.getLogger().log(Level.SEVERE, "Unable to kick " + player.getName() + " (" + player.getUniqueId() + ") via BungeeCord messaging.", t);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "ForgeLegalizerVerifier{" +
+                "kickMessage='" + this.kickMessage + '\'' +
+                ", notifyMessage='" + this.notifyMessage + '\'' +
+                ", commands=" + this.commands +
+                ", forgeBrand=" + this.forgeBrand +
+                ", forgeChannel=" + this.forgeChannel +
+                ", blockUnknownVersions=" + this.blockUnknownVersions +
+                ", error=" + this.error +
+                ", brands=" + this.brands +
+                '}';
+    }
+
+    /**
+     * Reads the VarInt from the input.
+     *
+     * @param in Target input
+     * @return Read VarInt
+     * @throws IOException On I/O error or if VarInt is too large
+     * @see <a href="https://wiki.vg/VarInt_And_VarLong">wiki.vg/VarInt_And_VarLong</a>
+     */
+    private static int readVarInt(InputStream in) throws IOException {
+        int value = 0;
+        int pos = 0;
+        while (true) {
+            int b = in.read();
+            value |= (b & 0x7F) << pos;
+            if ((b & 0x80) == 0) break;
+            pos += 7;
+            if (pos >= 32) {
+                throw new IOException("Too large VarInt. Exploit attempt?");
+            }
+        }
+        return value;
     }
 }

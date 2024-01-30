@@ -2,8 +2,7 @@
  * MIT License
  *
  * Copyright (c) 2023 VidTu
- * Copyright (c) 2023 threefusii
- * Copyright (c) 2023 BromineMC
+ * Copyright (c) 2023-2024 BromineMC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -52,6 +51,7 @@ public final class ForgeLegalizer {
     /**
      * Mod initializer.
      */
+    @SuppressWarnings("ThisEscapedInObjectConstruction") // <- Forge API.
     public ForgeLegalizer() {
         // Create the channel to identify everyone.
         NetworkRegistry.newEventChannel(CHANNEL_NAME, () -> CHANNEL_VERSION, ignored -> true, version -> version.equals(NetworkRegistry.ACCEPTVANILLA) || version.equals(CHANNEL_VERSION));

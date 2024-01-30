@@ -2,8 +2,7 @@
  * MIT License
  *
  * Copyright (c) 2023 VidTu
- * Copyright (c) 2023 threefusii
- * Copyright (c) 2023 BromineMC
+ * Copyright (c) 2023-2024 BromineMC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -48,17 +47,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @author threefusii
  */
 @Mixin(GameRenderer.class)
-public final class GameRendererMixin {
+public abstract class GameRendererMixin {
     @Shadow @Final private Minecraft minecraft;
-
-    /**
-     * An instance of this class cannot be created.
-     *
-     * @throws AssertionError Always
-     */
-    private GameRendererMixin() {
-        throw new AssertionError("No instances.");
-    }
 
     // Injects into pick method to prevent hitting entities too far away.
     @Inject(method = "pick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", shift = At.Shift.BEFORE))

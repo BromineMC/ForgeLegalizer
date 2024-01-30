@@ -2,8 +2,7 @@
  * MIT License
  *
  * Copyright (c) 2023 VidTu
- * Copyright (c) 2023 threefusii
- * Copyright (c) 2023 BromineMC
+ * Copyright (c) 2023-2024 BromineMC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +28,6 @@ package ru.brominemc.forgelegalizerverifier;
 import com.google.common.base.Preconditions;
 import com.google.common.io.MoreFiles;
 import com.google.common.io.Resources;
-import com.google.common.reflect.TypeToken;
 import com.google.inject.Inject;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -59,10 +57,12 @@ import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import ninja.leaping.configurate.ConfigurationNode;
-import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Contract;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
+import org.spongepowered.configurate.ConfigurationNode;
+import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
 import java.net.URL;
 import java.nio.file.Files;
@@ -156,6 +156,21 @@ public final class ForgeLegalizerVerifier {
             .compact();
 
     /**
+     * Literal name pattern.
+     */
+    private static final Pattern NAME_PATTERN = Pattern.compile("%name%", Pattern.LITERAL);
+
+    /**
+     * Literal UUID pattern.
+     */
+    private static final Pattern UUID_PATTERN = Pattern.compile("%uuid%", Pattern.LITERAL);
+
+    /**
+     * Literal server pattern.
+     */
+    private static final Pattern SERVER_PATTERN = Pattern.compile("%server%", Pattern.LITERAL);
+
+    /**
      * ForgeLegalizer plugin channel.
      */
     private static final String CHANNEL = "forgelegalizer:v1";
@@ -178,6 +193,7 @@ public final class ForgeLegalizerVerifier {
     /**
      * Logger instance.
      */
+    @SuppressWarnings("NonConstantLogger") // <- Velocity API spec.
     private final Logger logger;
 
     /**
@@ -241,12 +257,12 @@ public final class ForgeLegalizerVerifier {
     /**
      * Player mapped to channels.
      */
-    private final Map<Player, Set<String>> channels = new WeakHashMap<>();
+    private final Map<Player, Set<String>> channels = new WeakHashMap<>(4);
 
     /**
      * Player mapped to brands.
      */
-    private final Map<Player, String> brands = new WeakHashMap<>();
+    private final Map<Player, String> brands = new WeakHashMap<>(4);
 
     @ApiStatus.Internal
     @Inject
@@ -356,30 +372,30 @@ public final class ForgeLegalizerVerifier {
             }
 
             // Reload the config.
-            YAMLConfigurationLoader loader = YAMLConfigurationLoader.builder().setPath(path).build();
+            YamlConfigurationLoader loader = YamlConfigurationLoader.builder().path(path).build();
             ConfigurationNode config = loader.load();
 
             // Get the values.
-            ConfigurationNode node = config.getNode("kickMessage");
-            Preconditions.checkState(!node.isVirtual() || !node.isList(), "'kickMessage' is absent");
-            this.kickMessage = Component.join(JoinConfiguration.newlines(), node.getList(TypeToken.of(String.class)).stream()
+            ConfigurationNode node = config.node("kickMessage");
+            Preconditions.checkState(!node.virtual() || !node.isList(), "'kickMessage' is absent");
+            this.kickMessage = Component.join(JoinConfiguration.newlines(), node.getList(String.class, List.of()).stream()
                     .map(MiniMessage.miniMessage()::deserialize)
                     .toArray(Component[]::new)).compact();
 
-            node = config.getNode("notifyMessage");
-            Preconditions.checkState(!node.isVirtual() || !node.isList(), "'notifyMessage' is absent");
-            this.notifyMessage = Component.join(JoinConfiguration.newlines(), node.getList(TypeToken.of(String.class)).stream()
+            node = config.node("notifyMessage");
+            Preconditions.checkState(!node.virtual() || !node.isList(), "'notifyMessage' is absent");
+            this.notifyMessage = Component.join(JoinConfiguration.newlines(), node.getList(String.class, List.of()).stream()
                     .map(MiniMessage.miniMessage()::deserialize)
                     .toArray(Component[]::new)).compact();
 
-            node = config.getNode("commands");
-            Preconditions.checkState(!node.isVirtual() || !node.isList(), "'commands' is absent");
-            this.commands = node.getList(TypeToken.of(String.class)).stream()
+            node = config.node("commands");
+            Preconditions.checkState(!node.virtual() || !node.isList(), "'commands' is absent");
+            this.commands = node.getList(String.class, List.of()).stream()
                     .map(String::intern)
                     .collect(Collectors.toList());
 
-            node = config.getNode("forgeBrand");
-            Preconditions.checkState(!node.isVirtual(), "'forgeBrand' is absent");
+            node = config.node("forgeBrand");
+            Preconditions.checkState(!node.virtual(), "'forgeBrand' is absent");
             String raw = node.getString();
             Preconditions.checkNotNull(raw, "'forgeBrand' is invalid or null");
             try {
@@ -388,8 +404,8 @@ public final class ForgeLegalizerVerifier {
                 throw new IllegalArgumentException("Unable to parse 'forgeBrand': " + raw, th);
             }
 
-            node = config.getNode("forgeChannel");
-            Preconditions.checkState(!node.isVirtual(), "'forgeChannel' is absent");
+            node = config.node("forgeChannel");
+            Preconditions.checkState(!node.virtual(), "'forgeChannel' is absent");
             raw = node.getString();
             Preconditions.checkNotNull(raw, "'forgeChannel' is invalid or null");
             try {
@@ -426,7 +442,7 @@ public final class ForgeLegalizerVerifier {
         if (!player.isActive() || version.compareTo(MIN_VERSION) < 0 || version.compareTo(MAX_VERSION) > 0) return;
 
         // Add channels.
-        this.channels.put(player, new HashSet<>());
+        this.channels.put(player, new HashSet<>(4));
     }
 
     // Remove from sets.
@@ -496,11 +512,11 @@ public final class ForgeLegalizerVerifier {
         if (this.kickMessage != null && !this.kickMessage.equals(Component.empty())) {
             // Prepare the reason.
             Component reason = this.kickMessage
-                    .replaceText(TextReplacementConfig.builder().matchLiteral("%name%")
+                    .replaceText(TextReplacementConfig.builder().match(NAME_PATTERN)
                             .replacement(player.getUsername()).build())
-                    .replaceText(TextReplacementConfig.builder().matchLiteral("%uuid%")
+                    .replaceText(TextReplacementConfig.builder().match(UUID_PATTERN)
                             .replacement(player.getUniqueId().toString()).build())
-                    .replaceText(TextReplacementConfig.builder().matchLiteral("%server%")
+                    .replaceText(TextReplacementConfig.builder().match(SERVER_PATTERN)
                             .replacement(player.getCurrentServer()
                                     .map(ServerConnection::getServerInfo)
                                     .map(ServerInfo::getName)
@@ -548,5 +564,22 @@ public final class ForgeLegalizerVerifier {
                                 .orElse("null")));
             }
         }
+    }
+
+    @Contract(pure = true)
+    @Override
+    @NonNull
+    public String toString() {
+        return "ForgeLegalizerVerifier{" +
+                "dataDirectory=" + this.dataDirectory +
+                ", kickMessage=" + this.kickMessage +
+                ", notifyMessage=" + this.notifyMessage +
+                ", commands=" + this.commands +
+                ", forgeBrand=" + this.forgeBrand +
+                ", forgeChannel=" + this.forgeChannel +
+                ", error=" + this.error +
+                ", channels=" + this.channels +
+                ", brands=" + this.brands +
+                '}';
     }
 }

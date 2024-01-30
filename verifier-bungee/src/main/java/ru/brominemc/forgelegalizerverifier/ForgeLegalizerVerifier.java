@@ -2,8 +2,7 @@
  * MIT License
  *
  * Copyright (c) 2023 VidTu
- * Copyright (c) 2023 threefusii
- * Copyright (c) 2023 BromineMC
+ * Copyright (c) 2023-2024 BromineMC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -71,21 +70,22 @@ import java.util.stream.Collectors;
  *
  * @author threefusii
  */
+@SuppressWarnings("DynamicRegexReplaceableByCompiledPattern") // <- I do sincerely hope people won't run this on J8.
 public final class ForgeLegalizerVerifier extends Plugin implements Listener {
     /**
      * Invalid configuration player kick.
      */
-    private static final BaseComponent[] INVALID_CONFIG_ERROR = TextComponent.fromLegacyText("\n§c> ForgeLegalizerVerifier§r\n\nThe configuration of §eForgeLegalizerVerifier§r plugin didn't load correctly. Please, §bnotify the admins§r. You §c§nwon't be able to join the server§r until they fix the error.\n");
+    private static final BaseComponent INVALID_CONFIG_ERROR = TextComponent.fromLegacy("\n§c> ForgeLegalizerVerifier§r\n\nThe configuration of §eForgeLegalizerVerifier§r plugin didn't load correctly. Please, §bnotify the admins§r. You §c§nwon't be able to join the server§r until they fix the error.\n");
 
     /**
      * Register decoding error.
      */
-    private static final BaseComponent[] REGISTER_ERROR = TextComponent.fromLegacyText("\n§c> ForgeLegalizerVerifier§r\n\nThe §eForgeLegalizerVerifier§r plugin couldn't decode your client channels. For security purposes, you §c§nhave been kicked§r.\n");
+    private static final BaseComponent REGISTER_ERROR = TextComponent.fromLegacy("\n§c> ForgeLegalizerVerifier§r\n\nThe §eForgeLegalizerVerifier§r plugin couldn't decode your client channels. For security purposes, you §c§nhave been kicked§r.\n");
 
     /**
      * Brand decoding error.
      */
-    private static final BaseComponent[] BRAND_ERROR = TextComponent.fromLegacyText("\n§c> ForgeLegalizerVerifier§r\n\nThe §eForgeLegalizerVerifier§r plugin couldn't decode your client brand. For security purposes, you §c§nhave been kicked§r.\n");
+    private static final BaseComponent BRAND_ERROR = TextComponent.fromLegacy("\n§c> ForgeLegalizerVerifier§r\n\nThe §eForgeLegalizerVerifier§r plugin couldn't decode your client brand. For security purposes, you §c§nhave been kicked§r.\n");
 
     /**
      * ForgeLegalizer plugin channel.
@@ -158,17 +158,18 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
     /**
      * Registered command.
      */
+    @SuppressWarnings("ThisEscapedInObjectConstruction") // <- It's fine.
     private final Command command = new FLVCommand(this);
 
     /**
      * Player mapped to brands.
      */
-    private final Map<ProxiedPlayer, Set<String>> channels = new WeakHashMap<>();
+    private final Map<ProxiedPlayer, Set<String>> channels = new WeakHashMap<>(4);
 
     /**
      * Player mapped to brands.
      */
-    private final Map<ProxiedPlayer, String> brands = new WeakHashMap<>();
+    private final Map<ProxiedPlayer, String> brands = new WeakHashMap<>(4);
 
     @Override
     public void onEnable() {
@@ -176,7 +177,7 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
         this.getProxy().getPluginManager().registerListener(this, this);
 
         // Register the command.
-        this.getProxy().getPluginManager().registerCommand(this, command);
+        this.getProxy().getPluginManager().registerCommand(this, this.command);
 
         // Load the config.
         this.loadConfigSafe();
@@ -284,7 +285,7 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
         if (!this.error) return;
 
         // Kick players.
-        event.setCancelReason(INVALID_CONFIG_ERROR);
+        event.setReason(INVALID_CONFIG_ERROR);
         event.setCancelled(true);
     }
 
@@ -298,7 +299,7 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
         if (!player.isConnected() || version < MIN_VERSION || version > MAX_VERSION) return;
 
         // Add channels.
-        this.channels.put(player, new HashSet<>());
+        this.channels.put(player, new HashSet<>(4));
     }
 
     // Remove from sets.
@@ -363,7 +364,7 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
             this.getLogger().log(Level.SEVERE, "Unable to process player's " + player.getName() + " (" + player.getUniqueId() + ") register payload for ForgeLegalizerVerifier.", t);
 
             // Kick the player.
-            player.disconnect(ForgeLegalizerVerifier.REGISTER_ERROR);
+            player.disconnect(REGISTER_ERROR);
 
             // Rethrow the error.
             throw new RuntimeException("Unable to process player's " + player + " register payload for ForgeLegalizerVerifier.", t);
@@ -395,8 +396,8 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
             }
 
             // Read the brand.
-            data = new byte[length];
-            available = in.read(data);
+            byte[] val = new byte[length];
+            available = in.read(val);
 
             // Verify the read amount.
             if (length != available) {
@@ -404,7 +405,7 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
             }
 
             // Create the brand.
-            String brand = new String(data, StandardCharsets.UTF_8).intern();
+            String brand = new String(val, StandardCharsets.UTF_8).intern();
 
             // Skip if log out.
             if (!player.isConnected()) return;
@@ -438,7 +439,7 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
             if (this.kickMessage != null && !this.kickMessage.isEmpty()) {
                 // Prepare the reason.
                 Server server = player.getServer();
-                BaseComponent[] reason = TextComponent.fromLegacyText(this.kickMessage
+                BaseComponent reason = TextComponent.fromLegacy(this.kickMessage
                         .replace("%name%", player.getName())
                         .replace("%uuid%", player.getUniqueId().toString())
                         .replace("%server%", server == null ? "null" : server.getInfo().getName()));
@@ -451,7 +452,7 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
             if (this.notifyMessage != null && !this.notifyMessage.isEmpty()) {
                 // Prepare the message.
                 Server server = player.getServer();
-                BaseComponent[] reason = TextComponent.fromLegacyText(this.notifyMessage
+                BaseComponent reason = TextComponent.fromLegacy(this.notifyMessage
                         .replace("%name%", player.getName())
                         .replace("%uuid%", player.getUniqueId().toString())
                         .replace("%server%", server == null ? "null" : server.getInfo().getName()));
@@ -481,11 +482,26 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
             this.getLogger().log(Level.SEVERE, "Unable to process player's " + player.getName() + " (" + player.getUniqueId() + ") brand payload for ForgeLegalizerVerifier.", t);
 
             // Kick the player.
-            player.disconnect(ForgeLegalizerVerifier.BRAND_ERROR);
+            player.disconnect(BRAND_ERROR);
 
             // Rethrow the error.
             throw new RuntimeException("Unable to process player's " + player + " brand payload for ForgeLegalizerVerifier.", t);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "ForgeLegalizerVerifier{" +
+                "kickMessage='" + this.kickMessage + '\'' +
+                ", notifyMessage='" + this.notifyMessage + '\'' +
+                ", commands=" + this.commands +
+                ", forgeBrand=" + this.forgeBrand +
+                ", forgeChannel=" + this.forgeChannel +
+                ", error=" + this.error +
+                ", command=" + this.command +
+                ", channels=" + this.channels +
+                ", brands=" + this.brands +
+                '}';
     }
 
     /**
@@ -496,17 +512,18 @@ public final class ForgeLegalizerVerifier extends Plugin implements Listener {
      * @throws IOException On I/O error or if VarInt is too large
      * @see <a href="https://wiki.vg/VarInt_And_VarLong">wiki.vg/VarInt_And_VarLong</a>
      */
-    private int readVarInt(InputStream in) throws IOException {
-        int i = 0, p = 0, b;
+    private static int readVarInt(InputStream in) throws IOException {
+        int value = 0;
+        int pos = 0;
         while (true) {
-            b = in.read();
-            i |= (b & 0x7F) << p;
+            int b = in.read();
+            value |= (b & 0x7F) << pos;
             if ((b & 0x80) == 0) break;
-            p += 7;
-            if (p >= 32) {
+            pos += 7;
+            if (pos >= 32) {
                 throw new IOException("Too large VarInt. Exploit attempt?");
             }
         }
-        return i;
+        return value;
     }
 }

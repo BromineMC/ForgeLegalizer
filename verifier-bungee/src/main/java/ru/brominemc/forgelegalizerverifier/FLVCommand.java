@@ -2,8 +2,7 @@
  * MIT License
  *
  * Copyright (c) 2023 VidTu
- * Copyright (c) 2023 threefusii
- * Copyright (c) 2023 BromineMC
+ * Copyright (c) 2023-2024 BromineMC
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -44,17 +43,17 @@ final class FLVCommand extends Command implements TabExecutor {
     /**
      * Success configuration reload.
      */
-    private static final BaseComponent[] CONFIG_RELOAD_SUCCESS = TextComponent.fromLegacyText("The configuration of §eForgeLegalizer§r has been §areloaded§r.");
+    private static final BaseComponent CONFIG_RELOAD_SUCCESS = TextComponent.fromLegacy("The configuration of §eForgeLegalizer§r has been §areloaded§r.");
 
     /**
      * Failure configuration reload.
      */
-    private static final BaseComponent[] CONFIG_RELOAD_FAIL = TextComponent.fromLegacyText("Unable to §creload§r the configuration of §eForgeLegalizer§r.");
+    private static final BaseComponent CONFIG_RELOAD_FAIL = TextComponent.fromLegacy("Unable to §creload§r the configuration of §eForgeLegalizer§r.");
 
     /**
      * Information message.
      */
-    private static final BaseComponent[] INFO = TextComponent.fromLegacyText(String.format("§eForgeLegalizerVerifier-Bungee§r version §6%s§r.\nAuthors: §c%s§r.\nModrinth: §ahttps://modrinth.com/mod/forgelegalizer§r\nGitHub: §bhttps://github.com/BromineMC/ForgeLegalizer",
+    private static final BaseComponent INFO = TextComponent.fromLegacy(String.format("§eForgeLegalizerVerifier-Bungee§r version §6%s§r.\nAuthors: §c%s§r.\nModrinth: §ahttps://modrinth.com/mod/forgelegalizer§r\nGitHub: §bhttps://github.com/BromineMC/ForgeLegalizer",
             ForgeLegalizerVerifier.class.getPackage().getSpecificationVersion(),
             ForgeLegalizerVerifier.class.getPackage().getSpecificationVendor()));
 
@@ -76,7 +75,7 @@ final class FLVCommand extends Command implements TabExecutor {
     @Override
     public void execute(CommandSender sender, String[] args) {
         // Reload the plugin if intended and has permission.
-        if (args.length != 0 && args[0].equalsIgnoreCase("reload") && sender.hasPermission("forgelegalizerverifier.reload")) {
+        if (args.length != 0 && "reload".equalsIgnoreCase(args[0]) && sender.hasPermission("forgelegalizerverifier.reload")) {
             // Reload the config.
             boolean result = this.plugin.loadConfigSafe();
 
@@ -100,5 +99,10 @@ final class FLVCommand extends Command implements TabExecutor {
 
         // Return no completions.
         return Collections.emptyList();
+    }
+
+    @Override
+    public String toString() {
+        return "FLVCommand{}";
     }
 }
