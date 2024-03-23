@@ -19,7 +19,7 @@ dependencies {
     // Minecraft
     minecraft("com.mojang:minecraft:1.18.2")
     mappings(loom.officialMojangMappings())
-    forge("net.minecraftforge:forge:1.18.2-40.2.17")
+    forge("net.minecraftforge:forge:1.18.2-40.2.18")
 
     // Speedup loading and testing
     modRuntimeOnly("curse.maven:lazydfu-460819:3544496")
