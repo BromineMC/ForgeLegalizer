@@ -3,9 +3,8 @@
 ## Supported Versions
 
 We support only the latest release version.
-We will also provide security patches for any pre-release version if it's released after the latest release version.
 
-As of January 2024, these are:
+As of March 2024, this is:
 
 |     Version     | Supported |  Type   |
 |:---------------:|:---------:|:-------:|
