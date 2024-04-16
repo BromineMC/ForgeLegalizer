@@ -9,5 +9,32 @@ updates:
     schedule:
       interval: daily
     ignore:
-      - dependency-name: "*spigot-api*"
-      - dependency-name: "*velocity-api*"
+      - dependency-name: "*spigot*"
+      - dependency-name: "*velocity*"
+      - dependency-name: "*forge*"
+  - package-ecosystem: gradle
+    directory: '/forge-1.18.2'
+    schedule:
+      interval: daily
+  - package-ecosystem: gradle
+    directory: '/forge-1.19.4'
+    schedule:
+      interval: daily
+    ignore:
+      - dependency-name: "*forge*"
+  - package-ecosystem: gradle
+    directory: '/verifier-bungee'
+    schedule:
+      interval: daily
+  - package-ecosystem: gradle
+    directory: '/verifier-spigot'
+    schedule:
+      interval: daily
+    ignore:
+      - dependency-name: "*spigot*"
+  - package-ecosystem: gradle
+    directory: '/verifier-velocity'
+    schedule:
+      interval: daily
+    ignore:
+      - dependency-name: "*velocity*"
