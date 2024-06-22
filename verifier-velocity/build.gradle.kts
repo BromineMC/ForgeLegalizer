@@ -20,7 +20,7 @@ dependencies {
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.release.set(17)
+    options.release = 17
 }
 
 tasks.withType<ProcessResources> {
@@ -34,7 +34,7 @@ tasks.withType<Jar> {
     from(rootDir.resolve("LICENSE"))
     manifest {
         attributes(
-            "Specification-Title" to "ForgeLegalizerVerifier-Velocity",
+            "Specification-Title" to "ForgeLegalizerVerifier",
             "Specification-Version" to project.version,
             "Specification-Vendor" to "BromineMC",
             "Implementation-Title" to "ForgeLegalizerVerifier-Velocity",

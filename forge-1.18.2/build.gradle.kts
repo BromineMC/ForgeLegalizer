@@ -19,7 +19,7 @@ dependencies {
     // Minecraft
     minecraft("com.mojang:minecraft:1.18.2")
     mappings(loom.officialMojangMappings())
-    forge("net.minecraftforge:forge:1.18.2-40.2.18")
+    forge("net.minecraftforge:forge:1.18.2-40.2.21")
 
     // Speedup loading and testing
     modRuntimeOnly("curse.maven:lazydfu-460819:3544496")
@@ -34,7 +34,7 @@ loom {
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
-    options.release.set(17)
+    options.release = 17
 }
 
 tasks.withType<ProcessResources> {

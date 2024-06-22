@@ -38,7 +38,7 @@ tasks.withType<Jar> {
     from("NOTICE")
     manifest {
         attributes(
-            "Specification-Title" to "ForgeLegalizerVerifier-Spigot",
+            "Specification-Title" to "ForgeLegalizerVerifier",
             "Specification-Version" to project.version,
             "Specification-Vendor" to "BromineMC",
             "Implementation-Title" to "ForgeLegalizerVerifier-Spigot",

@@ -36,7 +36,7 @@ tasks.withType<Jar> {
     from(rootDir.resolve("LICENSE"))
     manifest {
         attributes(
-            "Specification-Title" to "ForgeLegalizerVerifier-Bungee",
+            "Specification-Title" to "ForgeLegalizerVerifier",
             "Specification-Version" to project.version,
             "Specification-Vendor" to "BromineMC",
             "Implementation-Title" to "ForgeLegalizerVerifier-Bungee",
