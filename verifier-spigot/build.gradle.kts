@@ -4,7 +4,7 @@ plugins {
 
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 java.targetCompatibility = JavaVersion.VERSION_1_8
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 group = "ru.brominemc.forgelegalizerverifier"
 base.archivesName = "ForgeLegalizerVerifier-Spigot"
 description = "Fixes Forge player reach for 1.18.2 -> 1.19.4."
@@ -19,11 +19,12 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
-    compileOnly("com.viaversion:viaversion-api:4.10.2")
+    compileOnly("com.viaversion:viaversion-api:5.0.0")
 }
 
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
+    options.release = 8
 }
 
 tasks.withType<ProcessResources> {
