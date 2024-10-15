@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
-    compileOnly("com.viaversion:viaversion-api:5.0.4")
+    compileOnly("com.viaversion:viaversion-api:5.0.5")
 }
 
 tasks.withType<JavaCompile> {
