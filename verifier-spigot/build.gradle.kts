@@ -5,6 +5,7 @@ plugins {
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 java.targetCompatibility = JavaVersion.VERSION_1_8
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
 group = "ru.brominemc.forgelegalizerverifier"
 base.archivesName = "ForgeLegalizerVerifier-Spigot"
 description = "Fixes Forge player reach for 1.18.2 -> 1.19.4."
