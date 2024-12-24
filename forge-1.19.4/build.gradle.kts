@@ -1,5 +1,5 @@
 plugins {
-    id("dev.architectury.loom") version "1.9.420"
+    id("dev.architectury.loom") version "1.9.424"
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
