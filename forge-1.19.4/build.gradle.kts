@@ -24,7 +24,7 @@ dependencies {
 
     // Speedup loading and testing
     modRuntimeOnly("curse.maven:lazydfu-460819:4327266")
-    modRuntimeOnly("maven.modrinth:ksyxis:1.3.2")
+    modRuntimeOnly("maven.modrinth:ksyxis:1.3.3")
 }
 
 loom {
