@@ -27,7 +27,7 @@ Minecarft 1.18.2 -> 1.19.4 ONLY. Other platforms will only kick Forge 1.18.2 -> 
 **Q**: What license?  
 **A**: Most of the code is licensed as [MIT License](https://github.com/BromineMC/ForgeLegalizer/blob/main/LICENSE).
 Spigot plugin (all files in `verifier-spigot` directory) is licensed
-as [GNU General Public License 3.0](https://github.com/BromineMC/ForgeLegalizer/blob/main/verifier-spigot/COPYING) due
+as [GNU General Public License 3.0](https://github.com/BromineMC/ForgeLegalizer/blob/main/verifier-spigot/LICENSE) due
 to Bukkit and Spigot API being GPL too. See the [NOTICE](https://github.com/BromineMC/ForgeLegalizer/blob/main/NOTICE)
 file for more details about licensing.
 

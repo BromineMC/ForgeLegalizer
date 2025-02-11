@@ -4,8 +4,8 @@ under the "MIT License". See the `LICENSE` file or the text below for complete l
 ===== "MIT License" TEXT START =====
 MIT License
 
-Copyright (c) 2023 VidTu
-Copyright (c) 2023-2024 BromineMC
+Copyright (c) 2023-2025 VidTu
+Copyright (c) 2023-2025 BromineMC
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ SOFTWARE.
 ===== "MIT License" TEXT END =====
 
 All files in the `verifier-spigot` directory of this repository is licensed
-under the "GNU General Public License v3.0". See the `COPYING` and `NOTICE` files in
+under the "GNU General Public License v3.0". See the `LICENSE` and `NOTICE` files in
 the `verifier-spigot` directory or the text below for complete license text and complete notice text.
 
 ===== "GNU General Public License v3.0" TEXT START =====
@@ -711,8 +711,8 @@ Public License instead of this License.  But first, please read
 
 ===== "GNU General Public License v3.0" NOTICE TEXT START =====
 ForgeLegalizerVerifier-Spigot is a SpigotMC verifier plugin for ForgeLegalizer client modification.
-Copyright (C) 2023 VidTu
-Copyright (C) 2023-2024 BromineMC
+Copyright (C) 2023-2025 VidTu
+Copyright (C) 2023-2025 BromineMC
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
