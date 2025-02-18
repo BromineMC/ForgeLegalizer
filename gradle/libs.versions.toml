@@ -1,0 +1,48 @@
+# MIT License
+#
+# Copyright (c) 2023-2025 VidTu
+# Copyright (c) 2023-2025 BromineMC
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+[versions]
+architectury-loom = "1.9.426"
+bungeecord = "1.21-R0.1-SNAPSHOT"
+forge-mc1182 = "1.18.2-40.3.3"
+# Fixed in 45.0.39: https://maven.minecraftforge.net/net/minecraftforge/forge/1.19.4-45.0.39/forge-1.19.4-45.0.39-changelog.txt
+forge-mc1194 = "1.19.4-45.0.38"
+gson = "2.12.1"
+minecraft-mc1182 = "1.18.2"
+minecraft-mc1194 = "1.19.4"
+spigot = "1.8.8-R0.1-SNAPSHOT"
+velocity = "3.4.0-SNAPSHOT"
+viaversion = "5.2.1"
+
+[plugins]
+architectury-loom = { id = "dev.architectury.loom", version.ref = "architectury-loom" }
+
+[libraries]
+bungeecord = { module = "net.md-5:bungeecord-api", version.ref = "bungeecord" }
+forge-mc1182 = { module = "net.minecraftforge:forge", version.ref = "forge-mc1182" }
+forge-mc1194 = { module = "net.minecraftforge:forge", version.ref = "forge-mc1194" }
+minecraft-mc1182 = { module = "com.mojang:minecraft", version.ref = "minecraft-mc1182" }
+minecraft-mc1194 = { module = "com.mojang:minecraft", version.ref = "minecraft-mc1194" }
+spigot = { module = "org.spigotmc:spigot-api", version.ref = "spigot" }
+velocity = { module = "com.velocitypowered:velocity-api", version.ref = "velocity" }
+viaversion = { module = "com.viaversion:viaversion-api", version.ref = "viaversion" }

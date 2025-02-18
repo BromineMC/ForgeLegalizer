@@ -1,8 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "ru.brominemc.forgelegalizer.mixins",
   "compatibilityLevel": "JAVA_17",
+  "package": "ru.brominemc.forgelegalizer.mixins",
+  "refmap": "forgelegalizer.mixins.refmap.json",
   "client": [
     "GameRendererMixin"
   ],

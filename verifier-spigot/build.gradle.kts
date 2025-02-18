@@ -38,8 +38,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
-    compileOnly("com.viaversion:viaversion-api:5.2.1")
+    compileOnly(libs.spigot)
+    compileOnly(libs.viaversion) // Optional.
 }
 
 tasks.withType<JavaCompile> {
@@ -51,8 +51,13 @@ tasks.withType<JavaCompile> {
 tasks.withType<ProcessResources> {
     inputs.property("version", version)
     filesMatching("plugin.yml") {
-        expand("version" to version)
+        expand(inputs.properties)
     }
+}
+
+tasks.withType<AbstractArchiveTask> {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
 }
 
 tasks.withType<Jar> {

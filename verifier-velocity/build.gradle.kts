@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.velocitypowered:velocity-api:3.4.0-SNAPSHOT")
+    compileOnly(libs.velocity)
 }
 
 tasks.withType<JavaCompile> {
@@ -53,8 +53,13 @@ tasks.withType<JavaCompile> {
 tasks.withType<ProcessResources> {
     inputs.property("version", version)
     filesMatching("velocity-plugin.json") {
-        expand("version" to version)
+        expand(inputs.properties)
     }
+}
+
+tasks.withType<AbstractArchiveTask> {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
 }
 
 tasks.withType<Jar> {

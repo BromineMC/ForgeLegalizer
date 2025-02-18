@@ -1,5 +1,5 @@
 plugins {
-    id("dev.architectury.loom") version "1.9.426"
+    alias(libs.plugins.architectury.loom)
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -10,19 +10,39 @@ group = "ru.brominemc.forgelegalizer"
 base.archivesName = "ForgeLegalizer-Forge-1.19.4"
 description = "Fixes Forge player reach for 1.18.2 -> 1.19.4."
 
+loom {
+    silentMojangMappingsLicense()
+    forge {
+        mixinConfigs = setOf("forgelegalizer.mixins.json")
+    }
+    runs.named("client") {
+        vmArgs(
+            // Allow JVM without hotswap to work.
+            "-XX:+IgnoreUnrecognizedVMOptions",
+
+            // Set up RAM.
+            "-Xmx2G",
+
+            // Allow hot swapping on supported JVM.
+            "-XX:+AllowEnhancedClassRedefinition",
+            "-XX:+AllowRedefinitionToAddDeleteMethods",
+            "-XX:HotswapAgent=fatjar",
+            "-Dfabric.debug.disableClassPathIsolation=true"
+        )
+    }
+    @Suppress("UnstableApiUsage")
+    mixin {
+        defaultRefmapName = "forgelegalizer.mixins.refmap.json"
+    }
+}
+
 dependencies {
     // Minecraft
-    minecraft("com.mojang:minecraft:1.19.4")
+    minecraft(libs.minecraft.mc1194)
     mappings(loom.officialMojangMappings())
 
     // Forge
-    forge("net.minecraftforge:forge:1.19.4-45.0.38") // Fixed in 45.0.39.
-}
-
-loom {
-    forge {
-        mixinConfigs = setOf("forgelegalizer.mixins.json");
-    }
+    forge(libs.forge.mc1194)
 }
 
 tasks.withType<JavaCompile> {
@@ -34,8 +54,13 @@ tasks.withType<JavaCompile> {
 tasks.withType<ProcessResources> {
     inputs.property("version", version)
     filesMatching("META-INF/mods.toml") {
-        expand("version" to version)
+        expand(inputs.properties)
     }
+}
+
+tasks.withType<AbstractArchiveTask> {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
 }
 
 tasks.withType<Jar> {
@@ -45,7 +70,7 @@ tasks.withType<Jar> {
             "Specification-Title" to "ForgeLegalizer",
             "Specification-Version" to version,
             "Specification-Vendor" to "BromineMC",
-            "Implementation-Title" to "ForgeLegalizer",
+            "Implementation-Title" to "ForgeLegalizer-Forge-1.19.4",
             "Implementation-Version" to version,
             "Implementation-Vendor" to "VidTu, threefusii"
         )

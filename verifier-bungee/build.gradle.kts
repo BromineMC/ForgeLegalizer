@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("net.md-5:bungeecord-api:1.21-R0.1-SNAPSHOT")
+    compileOnly(libs.bungeecord)
 }
 
 tasks.withType<JavaCompile> {
@@ -55,8 +55,13 @@ tasks.withType<JavaCompile> {
 tasks.withType<ProcessResources> {
     inputs.property("version", version)
     filesMatching("bungee.yml") {
-        expand("version" to version)
+        expand(inputs.properties)
     }
+}
+
+tasks.withType<AbstractArchiveTask> {
+    isPreserveFileTimestamps = false
+    isReproducibleFileOrder = true
 }
 
 tasks.withType<Jar> {
