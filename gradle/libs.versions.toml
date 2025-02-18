@@ -26,7 +26,7 @@ architectury-loom = "1.9.426"
 bungeecord = "1.21-R0.1-SNAPSHOT"
 forge-mc1182 = "1.18.2-40.3.3"
 # Fixed in 45.0.39: https://maven.minecraftforge.net/net/minecraftforge/forge/1.19.4-45.0.39/forge-1.19.4-45.0.39-changelog.txt
-forge-mc1194 = "1.19.4-45.0.38"
+forge-mc1194 = "1.21-51.0.33"
 gson = "2.12.1"
 minecraft-mc1182 = "1.18.2"
 minecraft-mc1194 = "1.19.4"
