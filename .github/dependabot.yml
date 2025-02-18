@@ -32,6 +32,8 @@ updates:
     schedule:
       interval: daily
     ignore:
-      - dependency-name: "*spigot*"
-      - dependency-name: "*velocity*"
-      - dependency-name: "*forge*"
+      - dependency-name: "com.mojang:minecraft"
+      - dependency-name: "net.minecraftforge:forge"
+      - dependency-name: "org.spigotmc:spigot-api"
+      - dependency-name: "com.velocitypowered:velocity-api"
+        versions: [ ">=4.0.0" ]

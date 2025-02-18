@@ -31,6 +31,7 @@ gson = "2.12.1"
 minecraft-mc1182 = "1.18.2"
 minecraft-mc1194 = "1.19.4"
 spigot = "1.8.8-R0.1-SNAPSHOT"
+# If Velocity is ever updated to 4.0.0, revisit the dependabot/renovate configs.
 velocity = "3.4.0-SNAPSHOT"
 viaversion = "5.2.1"
 

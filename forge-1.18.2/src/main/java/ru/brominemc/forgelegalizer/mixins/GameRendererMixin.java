@@ -52,7 +52,7 @@ public abstract class GameRendererMixin {
 
     // Injects into pick method to prevent hitting entities too far away.
     @Inject(method = "pick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;pop()V", shift = At.Shift.BEFORE))
-    public void forgelegalizer$pick$pop(float tickDelta, CallbackInfo ci) {
+    public void forgelegalizer_pick_pop(float tickDelta, CallbackInfo ci) {
         // Skip if not enabled.
         if (!(this.minecraft.hitResult instanceof EntityHitResult result)) return;
 
@@ -68,11 +68,11 @@ public abstract class GameRendererMixin {
         double distance = eyePosition.distanceToSqr(targetLocation);
         double range = this.minecraft.player.getAttackRange();
 
-        // Check if range is too big.
-        if (distance > range * range) {
-            // Remove the hit.
-            this.minecraft.hitResult = BlockHitResult.miss(targetLocation, Direction.getNearest(viewVector.x, viewVector.y, viewVector.z), new BlockPos(targetLocation));
-            this.minecraft.crosshairPickEntity = null;
-        }
+        // Skip if range is allowed.
+        if (distance <= (range * range)) return;
+
+        // Remove the hit.
+        this.minecraft.hitResult = BlockHitResult.miss(targetLocation, Direction.getNearest(viewVector.x, viewVector.y, viewVector.z), new BlockPos(targetLocation));
+        this.minecraft.crosshairPickEntity = null;
     }
 }

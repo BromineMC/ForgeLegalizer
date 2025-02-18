@@ -26,8 +26,7 @@ loom {
             // Allow hot swapping on supported JVM.
             "-XX:+AllowEnhancedClassRedefinition",
             "-XX:+AllowRedefinitionToAddDeleteMethods",
-            "-XX:HotswapAgent=fatjar",
-            "-Dfabric.debug.disableClassPathIsolation=true"
+            "-XX:HotswapAgent=fatjar"
         )
     }
     @Suppress("UnstableApiUsage")

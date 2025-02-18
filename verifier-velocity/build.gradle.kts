@@ -37,7 +37,7 @@ description = "Fixes Forge player reach for 1.18.2 -> 1.19.4."
 
 repositories {
     mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public/") // Velocity.
 }
 
 dependencies {

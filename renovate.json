@@ -2,5 +2,15 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["com.mojang:minecraft", "net.minecraftforge:forge", "org.spigotmc:spigot-api"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["com.velocitypowered:velocity-api"],
+      "allowedVersions": "<4.0.0"
+    }
   ]
 }

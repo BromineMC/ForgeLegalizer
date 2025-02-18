@@ -31,10 +31,8 @@ description = "Fixes Forge player reach for 1.18.2 -> 1.19.4."
 
 repositories {
     mavenCentral()
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    maven("https://hub.spigotmc.org/nexus/content/groups/public/")
-    maven("https://oss.sonatype.org/content/repositories/snapshots/")
-    maven("https://repo.viaversion.com/")
+    maven("https://hub.spigotmc.org/nexus/content/groups/public/") // Spigot.
+    maven("https://repo.viaversion.com/") // ViaVersion.
 }
 
 dependencies {
