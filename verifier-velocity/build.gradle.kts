@@ -1,8 +1,8 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023-2025 VidTu
  * Copyright (c) 2023-2025 BromineMC
+ * Copyright (c) 2023-2025 VidTu
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -41,15 +41,18 @@ repositories {
 }
 
 dependencies {
+    // Velocity.
     compileOnly(libs.velocity)
 }
 
+// Compile with UTF-8, Java 17, and with all debug options.
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(listOf("-g", "-parameters"))
     options.release = 17
 }
 
+// Expand version.
 tasks.withType<ProcessResources> {
     inputs.property("version", version)
     filesMatching("velocity-plugin.json") {
@@ -57,11 +60,13 @@ tasks.withType<ProcessResources> {
     }
 }
 
+// Reproducible builds.
 tasks.withType<AbstractArchiveTask> {
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 }
 
+// Add LICENSE and manifest into the JAR file.
 tasks.withType<Jar> {
     from(rootDir.resolve("LICENSE"))
     manifest {

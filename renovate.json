@@ -5,7 +5,11 @@
   ],
   "packageRules": [
     {
-      "matchPackageNames": ["com.mojang:minecraft", "net.minecraftforge:forge", "org.spigotmc:spigot-api"],
+      "matchPackageNames": [
+        "com.mojang:minecraft",
+        "net.minecraftforge:forge",
+        "org.spigotmc:spigot-api"
+      ],
       "enabled": false
     },
     {

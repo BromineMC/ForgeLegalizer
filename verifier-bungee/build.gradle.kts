@@ -1,8 +1,8 @@
 /*
  * MIT License
  *
- * Copyright (c) 2023-2025 VidTu
  * Copyright (c) 2023-2025 BromineMC
+ * Copyright (c) 2023-2025 VidTu
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,14 +42,22 @@ repositories {
 }
 
 dependencies {
+    // BungeeCord.
     compileOnly(libs.bungeecord)
 }
 
+// Compile with UTF-8, Java 8, and with all debug options.
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
     options.compilerArgs.addAll(listOf("-g", "-parameters"))
+    // JDK 8 (used by 1.16.x) doesn't support the "-release" flag and
+    // uses "-source" and "-target" ones (see the top of the file),
+    // so we must NOT specify it or the "javac" will fail.
+    // If we ever gonna compile on newer Java versions, uncomment this line.
+    // options.release = 8
 }
 
+// Expand version.
 tasks.withType<ProcessResources> {
     inputs.property("version", version)
     filesMatching("bungee.yml") {
@@ -57,11 +65,13 @@ tasks.withType<ProcessResources> {
     }
 }
 
+// Reproducible builds.
 tasks.withType<AbstractArchiveTask> {
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 }
 
+// Add LICENSE and manifest into the JAR file.
 tasks.withType<Jar> {
     from(rootDir.resolve("LICENSE"))
     manifest {
