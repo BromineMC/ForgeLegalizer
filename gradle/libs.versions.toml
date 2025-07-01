@@ -33,7 +33,7 @@ minecraft-mc1194 = "1.19.4"
 spigot = "1.8.8-R0.1-SNAPSHOT"
 # If Velocity is ever updated to 4.0.0, revisit the dependabot/renovate configs.
 velocity = "3.4.0-SNAPSHOT"
-viaversion = "5.4.0"
+viaversion = "5.4.1"
 
 [plugins]
 architectury-loom = { id = "dev.architectury.loom", version.ref = "architectury-loom" }
