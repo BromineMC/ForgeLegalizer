@@ -22,7 +22,7 @@
 # SOFTWARE.
 
 [versions]
-architectury-loom = "1.10.433"
+architectury-loom = "1.10.434"
 bungeecord = "1.21-R0.4-SNAPSHOT"
 forge-mc1182 = "1.18.2-40.3.10"
 # Fixed in 45.0.39: https://maven.minecraftforge.net/net/minecraftforge/forge/1.19.4-45.0.39/forge-1.19.4-45.0.39-changelog.txt
